@@ -1,0 +1,53 @@
+@startuml
+' Direção vertical
+direction TB
+
+class Main {
+    +main(String[] args)
+}
+
+class IPhone {
+    -musicaAtual: String
+    -paginaAtual: String
+    -chamadaAtiva: boolean
+    -musicaTocando: boolean
+    +tocar()
+    +pausar()
+    +selecionarMusica(String)
+    +pararMusica(String)
+    +ligar(String)
+    +atender()
+    +iniciarCorreioVoz()
+    +exibirPagina(String)
+    +novaAba()
+    +atualizarPagina()
+    +exibirMenu()
+}
+
+class ReprodutorMusical {
+    <<interface>>
+    +tocar()
+    +pausar()
+    +pararMusica(String)
+    +selecionarMusica(String)
+}
+
+class AparelhoTelefonico {
+    <<interface>>
+    +ligar(String)
+    +atender()
+    +iniciarCorreioVoz()
+}
+
+class NavegadorInternet {
+    <<interface>>
+    +exibirPagina(String)
+    +novaAba()
+    +atualizarPagina()
+}
+
+IPhone ..|> ReprodutorMusical
+IPhone ..|> AparelhoTelefonico
+IPhone ..|> NavegadorInternet
+Main --> IPhone
+@enduml
