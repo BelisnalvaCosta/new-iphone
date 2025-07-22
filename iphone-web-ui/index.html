@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My iPhone Web</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+  <style>
+    :root {
+      --main-color: #74ebd5;
+      --secondary-color: #acb6e5;
+      --card-bg: rgba(255, 255, 255, 0.3);
+      --shadow: rgba(31, 38, 135, 0.18);
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, var(--main-color), var(--secondary-color));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      text-align: center;
+      margin-top: 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #222;
+      text-shadow: 0 2px 6px #fff8;
+    }
+    .container {
+      width: 100%;
+      max-width: 520px;
+      padding: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px var(--shadow);
+      padding: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .card h2 {
+      font-size: 1.3rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .card i {
+      margin-right: 8px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+    input:focus {
+      border-color: var(--main-color);
+    }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    button {
+      background-color: var(--main-color);
+      border: none;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+    button:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+    }
+    .status {
+      margin-top: 6px;
+      font-size: 0.95rem;
+      min-height: 20px;
+      color: #333;
+    }
+    .verse-card {
+      text-align: center;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow);
+      margin-bottom: 20px;
+      background: #fff;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      color: #222;
+      opacity: 0.7;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My iPhone Web</h1>
+  </header>
+  <div class="container">
+    <div class="card">
+      <h2><i class="fa fa-music"></i> Music Player</h2>
+      <input type="text" id="musicInput" placeholder="Digite o nome da música" />
+      <div class="btn-group">
+        <button id="playButton"><i class="fa fa-play"></i></button>
+        <button id="pauseButton"><i class="fa fa-pause"></i></button>
+        <button id="stopButton"><i class="fa fa-stop"></i></button>
+      </div>
+      <div id="musicStatus" class="status"></div>
+    </div>
+
+    <div class="card">
+      <h2><i class="fa fa-phone"></i> Phone</h2>
+      <input type="text" id="phoneInput" placeholder="Digite o número" />
+      <div class="btn-group">
+        <button id="callButton"><i class="fa fa-phone"></i></button>
+        <button id="answerButton"><i class="fa fa-phone-volume"></i></button>
+      </div>
+      <div id="phoneStatus" class="status"></div>
+    </div>
+
+    <div class="card">
+      <h2><i class="fa fa-globe"></i> Web Browser</h2>
+      <input type="text" id="urlInput" placeholder="Digite a URL" />
+      <div class="btn-group">
+        <button id="openButton"><i class="fa fa-external-link-alt"></i></button>
+        <button id="refreshButton"><i class="fa fa-sync"></i></button>
+      </div>
+      <div id="browserStatus" class="status"></div>
+    </div>
+
+    <div class="verse-card">
+      <strong>João 3:16</strong><br>
+      "Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito..."
+    </div>
+    <div class="verse-card" style="background: #ffe082;">
+      <strong style="color: #6a1b9a">Louvai ao Senhor!</strong><br>
+      "Adorai ao Senhor na beleza da santidade."<br>
+      <em>Salmos 96:9</em>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 My iPhone Web. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    // Music
+    const playButton = document.getElementById('playButton');
+    const pauseButton = document.getElementById('pauseButton');
+    const stopButton = document.getElementById('stopButton');
+    const musicInput = document.getElementById('musicInput');
+    const musicStatus = document.getElementById('musicStatus');
+
+    playButton.onclick = () => {
+      musicStatus.textContent = musicInput.value.trim()
+        ? `Tocando: ${musicInput.value}`
+        : 'Digite o nome da música.';
+    };
+    pauseButton.onclick = () => (musicStatus.textContent = 'Música pausada.');
+    stopButton.onclick = () => {
+      musicStatus.textContent = 'Música parada.';
+      musicInput.value = '';
+    };
+
+    // Phone
+    const callButton = document.getElementById('callButton');
+    const answerButton = document.getElementById('answerButton');
+    const phoneInput = document.getElementById('phoneInput');
+    const phoneStatus = document.getElementById('phoneStatus');
+
+    callButton.onclick = () => {
+      phoneStatus.textContent = phoneInput.value.trim()
+        ? `Ligando para: ${phoneInput.value}`
+        : 'Digite o número.';
+    };
+    answerButton.onclick = () => (phoneStatus.textContent = 'Chamada atendida.');
+
+    // Browser
+    const openButton = document.getElementById('openButton');
+    const refreshButton = document.getElementById('refreshButton');
+    const urlInput = document.getElementById('urlInput');
+    const browserStatus = document.getElementById('browserStatus');
+
+    openButton.onclick = () => {
+      browserStatus.textContent = urlInput.value.trim()
+        ? `Exibindo página: ${urlInput.value}`
+        : 'Digite a URL.';
+    };
+    refreshButton.onclick = () => {
+      browserStatus.textContent = urlInput.value.trim()
+        ? `Página atualizada: ${urlInput.value}`
+        : 'Nenhuma página para atualizar.';
+    };
+  </script>
+</body>
+</html>
