@@ -1,0 +1,1 @@
+SELECT * FROM iphone_schema.iphone;
